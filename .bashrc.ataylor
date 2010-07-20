@@ -1,0 +1,8 @@
+export HISTSIZE=5000
+export HISTIGNORE=fg:bg:ls
+export HISTCONTROL=ignoreboth
+export HISTTIMEFORMAT=%c
+
+export JAVA_HOME=
+export JAVA_OPTS="-Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
+export EDITOR="emacsclient"
