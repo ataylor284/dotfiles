@@ -71,6 +71,22 @@
 
 (server-start)
 
+;; misc useful stuff
+(defun recent-dired (dir prefix)
+  "dired of files recently changed"
+  (interactive "DRecently modified in directory: \np")
+  (let ((do-it (lambda ()
+		 (find-dired dir (format "-type f -mmin -%d" prefix))
+		 (rename-buffer "*Recently Modified*" t)))
+	(find-buffer (get-buffer "*Find*")))
+    (if find-buffer
+	(progn (set-buffer find-buffer)
+	       (rename-buffer "*Find*temp" t)
+	       (funcall do-it)
+	       (set-buffer find-buffer)
+	       (rename-buffer "*Find*"))
+      (funcall do-it))))
+
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
 ;;; interfacing with ELPA, the package archive.
