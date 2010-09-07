@@ -1,0 +1,26 @@
+[ui]
+username = 
+merge = internal:merge
+
+[diff]
+#ignorews = True
+ignorewsamount = True
+
+[alias]
+sglog = glog --style=/home/ataylor/dev/mercurial-cli-templates/map-cmdline.sglog -l25
+
+[extensions]
+rebase = 
+hgext.graphlog = 
+hgext.fetch = 
+histedit = ~/dev/hg/histedit
+hgshelve = ~/dev/hgshelve/hgshelve.py
+graphviz = ~/dev/hggraphviz/graphviz.py
+defpasswd = ~/dev/hgdefpasswd/defpasswd.py
+purge =
+zeroconf =
+prompt = ~/dev/hg-prompt/prompt.py
+#at = ~/dev/hg/at/at.py
+collapse = ~/dev/hg/hgcollapse/hgext/collapse.py
+#activity = ~/dev/hg-chart-extension/hgext/chart.py
+color = 
