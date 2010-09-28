@@ -36,6 +36,10 @@
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 (setq groovy-indent-level 8)
 (setq groovy-indent-tabs-mode t)
+(add-to-list 'auto-mode-alist '("\\.gsp\\'" . html-mode))
+
+;; elisp stuff
+(setq eval-expression-print-length nil)
 
 ;; erc IRC client stuff
 (require 'erc-dcc)
@@ -70,6 +74,12 @@
 (load-file "/home/ataylor/elisp/dvc/++build/dvc-load.el")
 
 (server-start)
+
+;; emms
+(require 'emms)
+(require 'emms-player-mpd)
+(add-to-list 'emms-info-functions 'emms-info-mpd)
+(add-to-list 'emms-player-list 'emms-player-mpd)
 
 ;; misc useful stuff
 (defun recent-dired (dir prefix)
