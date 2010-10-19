@@ -63,9 +63,9 @@
 	  (lambda () (setq truncate-lines t)))
 
 ;; misc packages
-(require 'woman)
-(setq woman-use-own-frame nil
-      woman-fill-column 75)
+(when (require 'woman 'nil 't)
+  (setq woman-use-own-frame nil
+	woman-fill-column 75))
 
 ;;(require 'twittering-mode)
 (require 'hudson-watch)
@@ -74,12 +74,6 @@
 (load-file "/home/ataylor/elisp/dvc/++build/dvc-load.el")
 
 (server-start)
-
-;; emms
-(require 'emms)
-(require 'emms-player-mpd)
-(add-to-list 'emms-info-functions 'emms-info-mpd)
-(add-to-list 'emms-player-list 'emms-player-mpd)
 
 ;; misc useful stuff
 (defun recent-dired (dir prefix)
@@ -97,6 +91,18 @@
 	       (rename-buffer "*Find*"))
       (funcall do-it))))
 
+(defun tab-width-toggle ()
+  "toggle between 8 space and 4 space tabs"
+  (interactive)
+  (if (eq tab-width 4)
+      (setq tab-width 8)
+    (setq tab-width 4)
+  (force-window-update (current-buffer))))
+(global-set-key (kbd "C-c t") 'tab-width-toggle)
+
+(defvar log-entry-regexp "^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\},[0-9]\\{3\\} \\[.*?\\] "
+  "A regexp that matches the beginning of a log entry from e.g. log4j")
+
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
 ;;; interfacing with ELPA, the package archive.
@@ -106,3 +112,20 @@
     (load
      (expand-file-name "~/.emacs.d/elpa/package.el"))
   (package-initialize))
+
+;; smex M-x replacement
+(when (require 'smex 'nil 't)
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+
+
+;; emms media player
+(when (require 'emms 'nil 't)
+  (require 'emms-player-mpd)
+  (if (boundp 'emms-info-functions)
+      (add-to-list 'emms-info-functions 'emms-info-mpd)
+    (setq emms-info-functions '(emms-info-mpd))
+  (add-to-list 'emms-player-list 'emms-player-mpd)))
+
