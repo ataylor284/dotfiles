@@ -4,10 +4,11 @@ merge = internal:merge
 
 [diff]
 #ignorews = True
-ignorewsamount = True
+#ignorewsamount = True
 
 [alias]
 sglog = glog --style=/home/ataylor/dev/mercurial-cli-templates/map-cmdline.sglog -l25
+qstatus = status --rev -2:.
 
 [extensions]
 rebase = 
@@ -24,3 +25,4 @@ prompt = ~/dev/hg-prompt/prompt.py
 collapse = ~/dev/hg/hgcollapse/hgext/collapse.py
 #activity = ~/dev/hg-chart-extension/hgext/chart.py
 color = 
+mq =
