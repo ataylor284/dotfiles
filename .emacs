@@ -1,5 +1,6 @@
 ;; paths n' stuff
 (add-to-list 'load-path "~/elisp")
+(setenv "PAGER" "cat")
 
 ;; global keyboard stuff
 (global-set-key (kbd "C-\\") 'hippie-expand)
@@ -15,11 +16,13 @@
        (scroll-bar-mode nil)
        (set-foreground-color "green")
        (set-background-color "black")
-       (set-default-font "Monospace 11")))
+       (set-default-font "Monospace 11")
+       (setq x-select-enable-clipboard t)))
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (setq x-stretch-cursor 't
       browse-url-browser-function 'browse-url-firefox
+      browse-url-firefox-program "firefox-4.0"
       mouse-yank-at-point 't)
 
 (set-default 'indent-line-function 'tab-to-tab-stop)

@@ -5,6 +5,7 @@ merge = internal:merge
 [diff]
 #ignorews = True
 #ignorewsamount = True
+git = 1
 
 [alias]
 sglog = glog --style=/home/ataylor/dev/mercurial-cli-templates/map-cmdline.sglog -l25
@@ -14,6 +15,8 @@ qstatus = status --rev -2:.
 rebase = 
 hgext.graphlog = 
 hgext.fetch = 
+hgext.mq =
+hgext.patchbomb =
 histedit = ~/dev/hg/histedit
 hgshelve = ~/dev/hgshelve/hgshelve.py
 graphviz = ~/dev/hggraphviz/graphviz.py
@@ -25,4 +28,13 @@ prompt = ~/dev/hg-prompt/prompt.py
 collapse = ~/dev/hg/hgcollapse/hgext/collapse.py
 #activity = ~/dev/hg-chart-extension/hgext/chart.py
 color = 
-mq =
+churn =
+
+[email]
+method = smtp
+
+[smtp]
+host = localhost
+
+[web]
+cacerts = /home/ataylor/.hgserver.pem

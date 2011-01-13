@@ -4,6 +4,8 @@ export HISTCONTROL=ignoreboth
 export HISTTIMEFORMAT=%c
 
 export JAVA_HOME=
+export JDK_HOME=
 export JAVA_OPTS="-Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
 export EDITOR="emacsclient"
 export PATH=/home/ataylor/.gem/ruby/1.9.1/bin:$PATH
+export PATH=/data/grails/current/bin:/data/groovy/current/bin:/data/griffon/current/bin:$PATH
