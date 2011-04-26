@@ -11,21 +11,33 @@
 
 ;; nice minimalist UI
 (cond (window-system
-       (menu-bar-mode nil)
-       (tool-bar-mode nil)
-       (scroll-bar-mode nil)
+       (menu-bar-mode -1)
+       (tool-bar-mode -1)
+       (scroll-bar-mode -1)
        (set-foreground-color "green")
        (set-background-color "black")
        (set-default-font "Monospace 11")
        (setq x-select-enable-clipboard t)))
 
+;; ansi color in shell mode and compilation buffers
+(require 'ansi-color)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 (setq x-stretch-cursor 't
       browse-url-browser-function 'browse-url-firefox
-      browse-url-firefox-program "firefox-4.0"
+      browse-url-firefox-program "firefox-trunk"
       mouse-yank-at-point 't)
 
 (set-default 'indent-line-function 'tab-to-tab-stop)
+
+;; buffer naming
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
 
 ;; c family language stuff
 (defun my-c-mode-hook ()
@@ -42,7 +54,11 @@
 (add-to-list 'auto-mode-alist '("\\.gsp\\'" . html-mode))
 
 ;; elisp stuff
+(require 'cl)
 (setq eval-expression-print-length nil)
+
+;; twitter
+;;(require 'twittering-mode)
 
 ;; erc IRC client stuff
 (require 'erc-dcc)
@@ -53,12 +69,16 @@
 (defun erc-global-notify (matched-type nick msg)
   (interactive)
   (when (eq matched-type 'current-nick)
-    (shell-command
-     (concat "notify-send -t 4000 -c \"im.received\" \""
-             (car (split-string nick "!"))
-             " mentioned your nick\" \""
-             msg
-             "\""))))
+    (let ((from-nick-short (car (split-string nick "!")))
+	  (msg-flat (apply #'string (mapcar (lambda (c) (if (eq c ?\n) ?\s c)) msg))))
+      (shell-command
+       (concat "notify-send -t 4000 -c \"im.received\" \"" from-nick-short " mentioned your nick\" \"" msg-flat "\""))
+      (let* ((tweet (concat from-nick-short ": " msg-flat))
+	     (parameters `(("user" . "ataylor284")
+			  ("text" . ,(substring tweet 0 (min (length tweet) 140))))))
+	(twittering-http-post twittering-api-host
+			      "1/direct_messages/new"
+			      parameters)))))
 (add-hook 'erc-text-matched-hook 'erc-global-notify)
 
 ;; SQL mode stuff
@@ -70,7 +90,6 @@
   (setq woman-use-own-frame nil
 	woman-fill-column 75))
 
-;;(require 'twittering-mode)
 (require 'hudson-watch)
 ;;(setq hudson-rss-url "")
 
@@ -105,6 +124,16 @@
 
 (defvar log-entry-regexp "^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\},[0-9]\\{3\\} \\[.*?\\] "
   "A regexp that matches the beginning of a log entry from e.g. log4j")
+
+(defun default-windows ()
+  "set up windows how i like em"
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (other-window 1)
+  (switch-to-buffer "#VW")
+  (other-window 1))
+(global-set-key (kbd "C-c 1") 'default-windows)
 
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
