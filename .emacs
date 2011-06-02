@@ -5,9 +5,11 @@
 ;; global keyboard stuff
 (global-set-key (kbd "C-\\") 'hippie-expand)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "\C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-c g") 'goto-line)
+(global-set-key (kbd "C-c l") 'linum-mode)
 
 ;; nice minimalist UI
 (cond (window-system
@@ -31,7 +33,8 @@
 (setq x-stretch-cursor 't
       browse-url-browser-function 'browse-url-firefox
       browse-url-firefox-program "firefox-trunk"
-      mouse-yank-at-point 't)
+      mouse-yank-at-point 't
+      line-move-visual nil)
 
 (set-default 'indent-line-function 'tab-to-tab-stop)
 
@@ -58,7 +61,8 @@
 (setq eval-expression-print-length nil)
 
 ;; twitter
-;;(require 'twittering-mode)
+(add-to-list 'load-path "~/elisp/twittering-mode")
+(require 'twittering-mode)
 
 ;; erc IRC client stuff
 (require 'erc-dcc)
@@ -84,6 +88,21 @@
 ;; SQL mode stuff
 (add-hook 'sql-interactive-mode-hook
 	  (lambda () (setq truncate-lines t)))
+
+;; w3m
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m")
+(require 'w3m)
+(add-hook 'w3m-mode-hook 
+	  (lambda () (define-key w3m-mode-map (kbd "C-x b") nil))) ; really really really dislike w3m buffer switching override
+(setq w3m-use-cookies t)
+(add-hook 'dired-mode-hook
+	  (lambda ()
+	    (define-key dired-mode-map "\C-xm" 'dired-w3m-find-file)))
+(defun dired-w3m-find-file ()
+  (interactive)
+  (let ((file (dired-get-filename)))
+    (if (y-or-n-p (format "Open 'w3m' %s " (file-name-nondirectory file)))
+	(w3m-find-file file))))
 
 ;; misc packages
 (when (require 'woman 'nil 't)
