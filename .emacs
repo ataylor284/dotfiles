@@ -12,8 +12,8 @@
 (global-set-key (kbd "C-c l") 'linum-mode)
 
 ;; nice minimalist UI
+(menu-bar-mode -1)
 (cond (window-system
-       (menu-bar-mode -1)
        (tool-bar-mode -1)
        (scroll-bar-mode -1)
        (set-foreground-color "green")
@@ -44,17 +44,20 @@
 
 ;; c family language stuff
 (defun my-c-mode-hook ()
-  (setq indent-tabs-mode t)
-  (setq c-basic-offset 8))
+  (setq indent-tabs-mode nil
+	c-basic-offset 4))
 (add-hook 'c-mode-common-hook 'my-c-mode-hook)
 
 ;; groovy stuff
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
-(setq groovy-indent-level 8)
-(setq groovy-indent-tabs-mode t)
+(setq groovy-indent-level 4)
+(setq groovy-indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.gsp\\'" . html-mode))
+(require 'find-dired)
+(setq find-args "-name \*.groovy -o -name \*.java -o -name \*.gsp")
+(push find-args find-args-history)
 
 ;; elisp stuff
 (require 'cl)
