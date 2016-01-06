@@ -1,0 +1,10 @@
+[user]
+	email = 
+	name = Andrew Taylor
+[push]
+	default = simple
+[alias]
+	glog = log --pretty='tformat:%C(auto)%h %Cblue%<(10,trunc)%ad %Cred%<(13,trunc)%an	%Cgreen%s' -n20 --graph --color
+	stat = status -s
+	stats = diff --stat
+	ci = commit
