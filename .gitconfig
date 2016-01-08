@@ -3,8 +3,16 @@
 	name = Andrew Taylor
 [push]
 	default = simple
+[log]
+	date = relative
+	decorate = short
 [alias]
-	glog = log --pretty='tformat:%C(auto)%h %Cblue%<(10,trunc)%ad %Cred%<(13,trunc)%an	%Cgreen%s' -n20 --graph --color
+	lg = log --pretty='tformat:%C(auto)%h %Cblue%<(10,trunc)%ad %Cred%<(13,trunc)%an %Cgreen%s%C(cyan)%d' -n20 --graph --color
 	stat = status -s
 	stats = diff --stat
 	ci = commit
+	fix = commit --amend
+	files = show --format='' --name-only
+	diffc = diff --cached
+	forget = update-index --assume-unchanged
+	show-tags = "!f() { git show-ref --tags -d --abbrev | grep '\\^{}$'; }; f"
