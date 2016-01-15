@@ -74,6 +74,7 @@
 (load "~/.emacs.d/init-misc")
 ;;(load "~/.emacs.d/init-erc")
 (load "~/.emacs.d/init-w3m")
+;;(load "~/.emacs.d/init-mozrepl")
 (load "~/.emacs.d/string-inflection")
 
 (require 'package)
