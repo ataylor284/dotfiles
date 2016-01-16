@@ -17,3 +17,5 @@
 	forget = update-index --assume-unchanged
 	show-tags = "!f() { git show-ref --tags -d --abbrev | grep '\\^{}$'; }; f"
 	head = log HEAD -n1
+[core]
+	pager = cat
