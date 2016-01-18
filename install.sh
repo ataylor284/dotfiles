@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IGNORE='^install\.sh$|^.*~$'
+IGNORE='^install\.sh$|^.*~$|^\.gitignore$'
 
 for FILE in $(git ls-files); do
     if [[ "$FILE" =~ $IGNORE ]] ; then
