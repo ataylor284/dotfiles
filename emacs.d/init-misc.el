@@ -6,8 +6,8 @@
   (interactive)
   (if (eq tab-width 4)
       (setq tab-width 8)
-    (setq tab-width 4)
-  (force-window-update (current-buffer))))
+    (setq tab-width 4))
+  (force-window-update (current-buffer)))
 (global-set-key (kbd "C-c t") 'tab-width-toggle)
 
 ;; load find-dired and push a useful default into the history
