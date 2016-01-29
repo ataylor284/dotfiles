@@ -17,5 +17,10 @@
 	forget = update-index --assume-unchanged
 	show-tags = "!f() { git show-ref --tags -d --abbrev | grep '\\^{}$'; }; f"
 	head = log HEAD -n1
+	serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 [core]
 	pager = cat
+[man]
+	viewer = catman
+[man "catman"]
+	cmd = man -P cat
