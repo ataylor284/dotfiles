@@ -47,7 +47,7 @@
 ;; OS X
 (when (eq window-system 'ns)
   (setq exec-path (append exec-path '("/usr/local/bin" "/usr/X11/bin")))
-  (set-default-font "Menolo 15")
+  (set-default-font "Menlo-15")
   (setq save-interprogram-paste-before-kill nil
 	mac-command-modifier 'meta))
 
@@ -81,7 +81,8 @@
 (load "~/.emacs.d/init-sql")
 (load "~/.emacs.d/init-misc")
 ;;(load "~/.emacs.d/init-erc")
-(if (and (>= emacs-major-version 24) (>= emacs-minor-version 5))
+(if (or (> emacs-major-version 24)
+	(and (= emacs-major-version 24) (>= emacs-minor-version 5)))
     (load "~/.emacs.d/init-eww")
   (load "~/.emacs.d/init-w3m"))
 ;;(load "~/.emacs.d/init-mozrepl")
