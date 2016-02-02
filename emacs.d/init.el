@@ -40,7 +40,8 @@
 ;;	exec-path (cons cygwin-bin exec-path)
 	find-program "/usr/bin/find.exe"
 	shell-file-name "bash"
-	explicit-shell-file-name "bash"))
+	explicit-shell-file-name "bash"
+	jtags-etags-command "/usr/bin/find `pwd` -type f -name \*.java -exec cygpath -m {} + | etags --declarations --members -o %f -"))
 ;;  (setenv "PATH" (concat cygwin-bin ";" (getenv "PATH"))))
 
 ;; OS X
@@ -85,6 +86,7 @@
   (load "~/.emacs.d/init-w3m"))
 ;;(load "~/.emacs.d/init-mozrepl")
 (load "~/.emacs.d/string-inflection")
+(load "~/.emacs.d/site-local.el" 'no-error)
 
 (require 'package)
 (add-to-list 'package-archives
