@@ -14,6 +14,10 @@
 (global-set-key (kbd "C-c o") 'ff-find-other-file)
 (global-set-key (kbd "M-%") 'query-replace-regexp)
 (global-set-key (kbd "C-c i") 'string-inflection-toggle)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(require 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
 
 ;; nice minimalist UI
 (menu-bar-mode -1)
