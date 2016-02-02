@@ -90,6 +90,7 @@
     (load "~/.emacs.d/init-eww")
   (load "~/.emacs.d/init-w3m"))
 ;;(load "~/.emacs.d/init-mozrepl")
+(load "~/.emacs.d/init-scala")
 (load "~/.emacs.d/string-inflection")
 (load "~/.emacs.d/site-local.el" 'no-error)
 
