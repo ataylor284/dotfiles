@@ -1,3 +1,8 @@
+;; general enhancments
+(require 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
+(require 'ffap) ; find-file-at-point
+(ffap-bindings)
 
 ;; tab width stuff
 (setq tab-width 4)
