@@ -4,7 +4,20 @@
 (require 'ffap) ; find-file-at-point
 (ffap-bindings)
 
-;; tab width stuff
+;; buffer naming
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
+
+;; ansi color in shell mode and compilation buffers
+(require 'ansi-color)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(defun colorize-compilation-buffer ()
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+;; tab stuff
+(set-default 'indent-line-function 'tab-to-tab-stop)
 (setq tab-width 4)
 (defun tab-width-toggle ()
   "toggle between 8 space and 4 space tabs"
