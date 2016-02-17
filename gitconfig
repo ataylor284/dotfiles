@@ -18,6 +18,8 @@
 	show-tags = "!f() { git show-ref --tags -d --abbrev | grep '\\^{}$'; }; f"
 	head = log HEAD -n1
 	serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+	authors = "!f() { git log --all --format='%aN <%aE>'| sort | uniq; }; f"
+	root = rev-parse --show-toplevel
 [core]
 	pager = cat
 [man]
