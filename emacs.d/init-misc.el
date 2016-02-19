@@ -11,22 +11,21 @@
 ;; ansi color in shell mode and compilation buffers
 (require 'ansi-color)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(defun colorize-compilation-buffer ()
+(defun at/colorize-compilation-buffer ()
   (let ((inhibit-read-only t))
     (ansi-color-apply-on-region (point-min) (point-max))))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+(add-hook 'compilation-filter-hook 'at/colorize-compilation-buffer)
 
 ;; tab stuff
 (set-default 'indent-line-function 'tab-to-tab-stop)
 (setq tab-width 4)
-(defun tab-width-toggle ()
-  "toggle between 8 space and 4 space tabs"
+(defun at/tab-width-toggle ()
+  "Toggle between 8 space and 4 space tabs."
   (interactive)
   (if (eq tab-width 4)
       (setq tab-width 8)
     (setq tab-width 4))
   (force-window-update (current-buffer)))
-(global-set-key (kbd "C-c t") 'tab-width-toggle)
 
 ;; load find-dired and push a useful default into the history
 (require 'find-dired)
@@ -36,7 +35,7 @@
 (push find-args find-args-history)
 
 ;; quick access to preferred window layout
-(defun default-windows ()
+(defun at/default-windows ()
   "set up windows how i like em"
   (interactive)
   (delete-other-windows)
@@ -44,9 +43,8 @@
   (other-window 1)
   (switch-to-buffer "*shell*")
   (other-window 1))
-(global-set-key (kbd "C-c 1") 'default-windows)
 
-(defun recent-dired (dir prefix)
+(defun at/recent-dired (dir prefix)
   "dired of files recently changed"
   (interactive "DRecently modified in directory: \np")
   (let ((do-it (lambda ()
@@ -62,7 +60,7 @@
       (funcall do-it))))
 
 ;; whip up a quick invoice
-(defun make-invoice (rate hours)
+(defun at/make-invoice (rate hours)
   (interactive "nRate: \nnHours: ")
   (pop-to-buffer (generate-new-buffer "*Invoice*"))
   (insert "Invoice\n\n")
@@ -71,7 +69,7 @@
   (insert (format "Total\t\t\t\t\$%.2f\n" (* 1.05 hours rate))))
 
 ;; quick java getter and setter shortcut
-(defun make-java-accessors (name type)
+(defun at/make-java-accessors (name type)
   "Insert Java getter and setter at the point for a given name and type."
   (interactive "sName: \nsType: ")
   (let ((capname (string-inflection-camelcase-function name)))
@@ -82,7 +80,7 @@
     (insert (format "        this.%s = %s;\n" name name))
     (insert "    }\n\n")))
 
-(defun comint-clear ()
+(defun at/comint-clear ()
   "Truncate the buffer and clear the screen in a comint buffer."
   (interactive)
   (let ((comint-buffer-maximum-size 0))

@@ -1,3 +1,4 @@
+;; groovy language
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 
 (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
@@ -6,10 +7,6 @@
 
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
-(setq groovy-indent-level 4)
-(setq groovy-indent-tabs-mode nil)
-
-(add-hook 'groovy-mode-hook
-          (lambda ()
-            (c-set-offset 'label 4)
-            (setq show-trailing-whitespace t)))
+(defun at/groovy-mode-hook ()
+  (c-set-offset 'label 4))
+(add-hook 'groovy-mode-hook 'at/groovy-mode-hook)
