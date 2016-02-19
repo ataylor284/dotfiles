@@ -24,7 +24,16 @@
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 
+(defvar at/packages '(autodisass-java-bytecode browse-kill-ring coffee-mode
+					       dockerfile-mode groovy-mode
+					       markdown-mode projectile
+					       scala-mode2 twittering-mode))
+(dolist (p at/packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
 (projectile-global-mode)
+(require 'autodisass-java-bytecode)
 
 (load "~/.emacs.d/init-groovy")
 (load "~/.emacs.d/init-elisp")
