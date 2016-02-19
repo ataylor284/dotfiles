@@ -1,0 +1,14 @@
+\set QUIET 1
+
+-- [<host>] <username>@<database>=>
+\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
+-- [more] ->
+\set PROMPT2 '[more] %R> '
+
+\pset pager off
+\pset linestyle unicode
+\pset null [NULL]
+
+\timing
+
+\unset QUIET
