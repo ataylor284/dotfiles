@@ -14,7 +14,7 @@
 	(w3m-find-file file))))
 (defun at/dired-browser-hook ()
   "Bind dired-w3m-find-file to key in dired."
-  (define-key dired-mode-map "\C-xm" 'at/dired-w3m-find-file)))
+  (define-key dired-mode-map "\C-xm" 'at/dired-w3m-find-file))
 (add-hook 'dired-mode-hook 'at/dired-browser-hook)
 
 (defun at/browse-this-file ()
