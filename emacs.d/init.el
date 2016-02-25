@@ -12,13 +12,6 @@
        (load "~/.emacs.d/window-system-all")
        (load (format "~/.emacs.d/window-system-%s" window-system) 'no-error)))
 
-;; c family language stuff
-(defun at/c-mode-hook ()
-  (setq indent-tabs-mode nil
-        c-basic-offset 4
-        show-trailing-whitespace t))
-(add-hook 'c-mode-common-hook 'at/c-mode-hook)
-
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
@@ -35,9 +28,7 @@
 (projectile-global-mode)
 (require 'autodisass-java-bytecode)
 
-(load "~/.emacs.d/init-groovy")
-(load "~/.emacs.d/init-elisp")
-(load "~/.emacs.d/init-sql")
+(load "~/.emacs.d/init-programming-modes")
 (load "~/.emacs.d/init-misc")
 ;;(load "~/.emacs.d/init-erc")
 (if (or (> emacs-major-version 24)
@@ -45,7 +36,6 @@
     (load "~/.emacs.d/init-eww")
   (load "~/.emacs.d/init-w3m"))
 ;;(load "~/.emacs.d/init-mozrepl")
-(load "~/.emacs.d/init-scala")
 (load "~/.emacs.d/string-inflection")
 (load "~/.emacs.d/site-local.el" 'no-error)
 
