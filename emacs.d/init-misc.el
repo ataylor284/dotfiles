@@ -8,6 +8,12 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
 
+;; backups
+(setq version-control t
+      delete-old-versions t
+      kept-old-versions 3
+      kept-new-versions 3)
+
 ;; ansi color in shell mode and compilation buffers
 (require 'ansi-color)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -33,6 +39,10 @@
 (setq find-args (concat "-path ./build -prune -o "
                         (mapconcat (apply-partially 'format "-name \\*.%s") interesting-file-extensions " -o ")))
 (push find-args find-args-history)
+
+;; twittering
+(setq twittering-fill-column 80)
+(setq twittering-username-face '((t (:foreground "orange" :underline t))))
 
 ;; quick access to preferred window layout
 (defun at/default-windows ()
