@@ -7,7 +7,14 @@ export HISTTIMEFORMAT=%c
 export JAVA_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
 export JDK_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
 export JAVA_OPTS="-noverify -Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
-export EDITOR="emacsclient"
+
+if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]] ; then
+    export EDITOR='c:/emacs/bin/emacsclient.exe'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    export EDITOR="emacsclient"	# FIXME
+else
+    export EDITOR="emacsclient"
+fi
 
 # set XXX_HOME and add bin subdirectory to PATH for all packages set
 # up with a symbolic link pointing to current version
