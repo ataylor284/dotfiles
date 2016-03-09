@@ -41,8 +41,9 @@
 (push find-args find-args-history)
 
 ;; twittering
-(setq twittering-fill-column 80)
-(setq twittering-username-face '((t (:foreground "orange" :underline t))))
+(setq twittering-fill-column 80
+      twittering-use-native-retweet t
+      twittering-username-face '((t (:foreground "orange" :underline t))))
 
 ;; quick access to preferred window layout
 (defun at/default-windows ()
