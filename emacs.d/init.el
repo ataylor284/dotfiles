@@ -20,7 +20,8 @@
 (defvar at/packages '(autodisass-java-bytecode browse-kill-ring coffee-mode
 					       dockerfile-mode groovy-mode
 					       markdown-mode projectile
-					       scala-mode2 twittering-mode))
+					       scala-mode2 twittering-mode
+					       ws-butler))
 (dolist (p at/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -55,6 +56,8 @@
 (global-set-key (kbd "C-c t") 'at/tab-width-toggle)
 (global-set-key (kbd "C-c 1") 'at/default-windows)
 (global-set-key (kbd "C-c h") 'at/browse-this-file)
+(global-set-key (kbd "<f9>") 'recompile)
+(global-set-key (kbd "C-=") 'at/inline-calc)
 
 ;; stuff to put in the global namespace
 (defalias 'tab-width-toggle 'at/tab-width-toggle)

@@ -95,3 +95,17 @@
   (interactive)
   (let ((comint-buffer-maximum-size 0))
     (comint-truncate-buffer)))
+
+(defun at/inline-calc (arg)
+  "Evaluate a region as an algebraic expression via Calc.  Either
+replace it with or append to it (if given a prefix argument) the
+result."
+  (interactive "P")
+  (require 'calc)
+  (let ((calc-multiplication-has-precedence nil)
+	(result (calc-eval (buffer-substring (region-beginning) (region-end)))))
+    (if (not arg)
+	(delete-region (region-beginning) (region-end))
+      (goto-char (region-end))
+      (insert " = "))
+    (insert result)))
