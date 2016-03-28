@@ -1,29 +1,27 @@
 #-*- mode: shell-script -*-
-export HISTSIZE=5000
-export HISTIGNORE=fg:bg:ls
-export HISTCONTROL=ignoreboth
-export HISTTIMEFORMAT=%c
+HISTSIZE=50000
+HISTFILESIZE=50000
+HISTIGNORE=fg:bg:ls
+HISTCONTROL=ignoreboth
+HISTTIMEFORMAT='%c '
+shopt -s histappend
 
-export JAVA_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
-export JDK_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
-export JAVA_OPTS="-noverify -Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
+export PS1='\u@\h:\w\$ '
 
 if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]] ; then
     export EDITOR='c:/emacs/bin/emacsclient.exe'
+    export JAVA_HOME=c:/Program\ Files/Java/jdk1.8.0_65
+    # hack to get cywin ssh to work in emacs shell mode
+    alias cssh="c:/Users/ataylor2/workspace/fakecygpty/fakecygpty.exe c:/cygwin64/bin/ssh"
+    alias kill="taskkill -F -PID"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     export EDITOR="emacsclient"	# FIXME
 else
+    export JAVA_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
+    export JDK_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
+    export JAVA_OPTS="-noverify -Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
     export EDITOR="emacsclient"
 fi
-
-# set XXX_HOME and add bin subdirectory to PATH for all packages set
-# up with a symbolic link pointing to current version
-for DIR in $(find /home/ataylor/packages -maxdepth 1 -type l); do
-    if [ -d $DIR/bin ] ; then
-        export $(basename $DIR | tr a-z A-Z)_HOME=$DIR
-        export PATH=$PATH:$DIR/bin
-    fi
-done
 
 # put user local ruby gems in path
 if which ruby >/dev/null && which gem >/dev/null; then
@@ -34,3 +32,7 @@ alias serve="python -m SimpleHTTPServer $@"
 alias gvm=sdk
 
 [[ -s "/home/ataylor/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ataylor/.sdkman/bin/sdkman-init.sh"
+
+for SCRIPT in $HOME/.bash_profile.d/*.sh; do
+    source $SCRIPT
+done
