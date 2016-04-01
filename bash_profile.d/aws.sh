@@ -1,5 +1,9 @@
 # EC2
-alias aws_ec2_ls="aws ec2 describe-instances --query 'Reservations[].Instances[].[Tags[?Key==\`Name\`] | [0].Value, State.Name, PublicDnsName]' --output table"
+alias aws_ec2_ls="aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, Tags[?Key==\`Name\`] | [0].Value, State.Name, PublicDnsName]' --output table"
+alias aws_ec2_ips="aws ec2 describe-instances --query 'Reservations[0].Instances[0].[PublicDnsName,PublicIpAddress,PrivateIpAddress]' --output table --instance-ids"
+alias aws_ec2_key="aws ec2 describe-instances --query Reservations[0].Instances[0].KeyName --output text --instance-ids"
+alias aws_ec2_type="aws ec2 describe-instances --query Reservations[0].Instances[0].InstanceType --output text --instance-ids"
+alias aws_ec2_stack="aws ec2 describe-instances --query 'Reservations[].Instances[].[Tags[?Key==\`aws:cloudformation:stack-name\`] | [0].Value]' --output text --instance-ids"
 
 # Cloud Formation
 alias aws_cf_ls="aws cloudformation describe-stacks --query=Stacks[].[Description,StackName,StackStatus] --output=table"
@@ -22,3 +26,6 @@ alias aws_dy_attributes="aws dynamodb describe-table --query Table.AttributeDefi
 # Kinesis Firehose
 alias aws_fh_ls="aws firehose list-delivery-streams --limit=200 --query DeliveryStreamNames --output table"
 alias aws_fh_dests="aws firehose describe-delivery-stream --query DeliveryStreamDescription.Destinations --output table --delivery-stream-name"
+
+# S3
+alias aws_s3_stack="aws s3api get-bucket-tagging --query 'TagSet[?Key==\`aws:cloudformation:stack-name\`] | [0].Value' --output text --bucket"
