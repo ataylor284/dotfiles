@@ -1,12 +1,14 @@
 #-*- mode: shell-script -*-
 HISTSIZE=50000
 HISTFILESIZE=50000
-HISTIGNORE=fg:bg:ls
-HISTCONTROL=ignoreboth
+HISTIGNORE=fg:bg:ls:exit:history
+HISTCONTROL=erasedups:ignoreboth
 HISTTIMEFORMAT='%c '
 shopt -s histappend
 
 export PS1='\u@\h:\w\$ '
+shopt -s cmdhist
+shopt -s checkwinsize
 
 if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]] ; then
     export EDITOR='c:/emacs/bin/emacsclient.exe'
