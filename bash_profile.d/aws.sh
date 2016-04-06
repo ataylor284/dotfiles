@@ -7,6 +7,7 @@ alias aws_ec2_stack="aws ec2 describe-instances --query 'Reservations[].Instance
 
 # Cloud Formation
 alias aws_cf_ls="aws cloudformation describe-stacks --query=Stacks[].[Description,StackName,StackStatus] --output=table"
+alias aws_cf_names="aws cloudformation describe-stacks --query=Stacks[].[StackName] --output=text"
 alias aws_cf_params="aws cloudformation describe-stacks --query=Stacks[].[Parameters] --output=table --stack-name"
 alias aws_cf_outputs="aws cloudformation describe-stacks --query=Stacks[].[Outputs] --output=table --stack-name"
 alias aws_cf_resources="aws cloudformation describe-stack-resources --query StackResources[].[LogicalResourceId,PhysicalResourceId,ResourceType,ResourceStatus] --output table --stack-name"
@@ -14,18 +15,23 @@ alias aws_cf_events="aws cloudformation describe-stack-events --query StackEvent
 
 # Lambda
 alias aws_lm_ls="aws lambda list-functions --query Functions[].[FunctionName,Runtime,LastModified] --output table"
+alias aws_lm_names="aws lambda list-functions --query Functions[].[FunctionName] --output text"
 alias aws_lm_hash="aws lambda list-functions --query Functions[].[FunctionName,CodeSha256] --output table"
 alias aws_lm_versions="aws lambda list-versions-by-function --query Versions[].[Version,LastModified] --output table --function-name"
 alias aws_lm_aliases="aws lambda list-aliases --query Aliases[].[Name,FunctionVersion] --output table --function-name"
 
 # DynamoDB
-alias aws_dy_ls="aws dynamodb list-tables --query TableNames --output table"
+alias aws_dy_ls="aws dynamodb list-tables --query TableNames[][@] --output text"
 alias aws_dy_keys="aws dynamodb describe-table --query Table.KeySchema --output table --table-name"
 alias aws_dy_attributes="aws dynamodb describe-table --query Table.AttributeDefinitions --output table --table-name"
+aws_dy_nth_row() { aws dynamodb scan --max-items $(($2 + 1)) --query 'Items['$2'].[keys(@), values(@)[].[S||N][]]' --output table --table-name $1; }
 
 # Kinesis Firehose
-alias aws_fh_ls="aws firehose list-delivery-streams --limit=200 --query DeliveryStreamNames --output table"
+alias aws_fh_ls="aws firehose list-delivery-streams --limit=200 --query DeliveryStreamNames[][@] --output text"
 alias aws_fh_dests="aws firehose describe-delivery-stream --query DeliveryStreamDescription.Destinations --output table --delivery-stream-name"
 
 # S3
 alias aws_s3_stack="aws s3api get-bucket-tagging --query 'TagSet[?Key==\`aws:cloudformation:stack-name\`] | [0].Value' --output text --bucket"
+
+# Cloud Trail
+alias aws_ct_events="aws cloudtrail lookup-events --max-results 15 --query Events[].[EventTime,Username,EventName] --output table"
