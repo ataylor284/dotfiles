@@ -5,6 +5,7 @@ HISTIGNORE=fg:bg:ls:exit:history
 HISTCONTROL=erasedups:ignoreboth
 HISTTIMEFORMAT='%c '
 shopt -s histappend
+PROMPT_COMMAND='history -a'
 
 export PS1='\u@\h:\w\$ '
 shopt -s cmdhist
