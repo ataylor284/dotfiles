@@ -18,7 +18,10 @@ if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]] ; then
     alias cssh="c:/Users/ataylor2/workspace/fakecygpty/fakecygpty.exe c:/cygwin64/bin/ssh"
     alias kill="taskkill -F -PID"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    export EDITOR="emacsclient"	# FIXME
+    export JAVA_HOME=$(/usr/libexec/java_home)
+    export JDK_HOME=$(/usr/libexec/java_home)
+    export JAVA_OPTS="-noverify -Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
+    export EDITOR=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
 else
     export JAVA_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
     export JDK_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
