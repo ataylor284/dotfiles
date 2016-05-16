@@ -4,6 +4,7 @@ alias aws_ec2_ips="aws ec2 describe-instances --query 'Reservations[0].Instances
 alias aws_ec2_key="aws ec2 describe-instances --query Reservations[0].Instances[0].KeyName --output text --instance-ids"
 alias aws_ec2_type="aws ec2 describe-instances --query Reservations[0].Instances[0].InstanceType --output text --instance-ids"
 alias aws_ec2_stack="aws ec2 describe-instances --query 'Reservations[].Instances[].[Tags[?Key==\`aws:cloudformation:stack-name\`] | [0].Value]' --output text --instance-ids"
+alias aws_ec2_console="aws ec2 get-console-output --query Output --output text --instance-id"
 
 # Cloud Formation
 alias aws_cf_ls="aws cloudformation describe-stacks --query=Stacks[].[Description,StackName,StackStatus] --output=table"
@@ -12,6 +13,7 @@ alias aws_cf_params="aws cloudformation describe-stacks --query=Stacks[].[Parame
 alias aws_cf_outputs="aws cloudformation describe-stacks --query=Stacks[].[Outputs] --output=table --stack-name"
 alias aws_cf_resources="aws cloudformation describe-stack-resources --query StackResources[].[LogicalResourceId,PhysicalResourceId,ResourceType,ResourceStatus] --output table --stack-name"
 alias aws_cf_events="aws cloudformation describe-stack-events --query StackEvents[].[Timestamp,ResourceStatus,LogicalResourceId,ResourceType] --output table --stack-name"
+alias aws_cf_event_reasons="aws cloudformation describe-stack-events --query StackEvents[].[LogicalResourceId,ResourceStatusReason] --output table --stack-name"
 alias aws_cf_rm="aws cloudformation delete-stack --stack-name"
 aws_cf_resource_name() { aws cloudformation describe-stack-resources --stack-name $1 --logical-resource-id $2 --query StackResources[].[PhysicalResourceId] --output text; }
 
@@ -50,6 +52,9 @@ alias aws_ev_rm="aws events delete-rule --name"
 alias aws_log_ls="aws logs describe-log-groups --query logGroups[].[logGroupName,storedBytes] --output table"
 alias aws_log_streams="aws logs describe-log-streams  --query logStreams[].[lastEventTimestamp,logStreamName] --output table --log-group-name"
 aws_log_cat() { aws logs get-log-events --log-group-name $1 --log-stream-name $2 --query events[].[message] --output text | sed '/^$/d'; }
+
+# Alarms
+alias aws_al_ls="aws cloudwatch describe-alarms --query MetricAlarms[].[AlarmName,Dimensions[0].Name,Dimensions[0].Value] --output table"
 
 # Roles
 alias aws_rl_ls="aws iam list-roles --query Roles[].[RoleName] --output text"
