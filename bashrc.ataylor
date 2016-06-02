@@ -29,15 +29,9 @@ else
     export EDITOR="emacsclient"
 fi
 
-# put user local ruby gems in path
-if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
-
 alias serve="python -m SimpleHTTPServer $@"
+alias json="python -m json.tool $@"
 alias gvm=sdk
-
-[[ -s "/home/ataylor/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ataylor/.sdkman/bin/sdkman-init.sh"
 
 for SCRIPT in $HOME/.bash_profile.d/*.sh; do
     source $SCRIPT
