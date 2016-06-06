@@ -1,6 +1,7 @@
 ;; paths n' stuff
 (add-to-list 'load-path "~/elisp")
 (setenv "PAGER" "cat")
+(prefer-coding-system 'utf-8-unix)
 
 ;; nice minimalist UI
 (menu-bar-mode -1)
