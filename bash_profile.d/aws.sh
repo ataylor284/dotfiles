@@ -7,6 +7,7 @@ alias aws_ec2_stack="aws ec2 describe-instances --query 'Reservations[].Instance
 alias aws_ec2_console="aws ec2 get-console-output --query Output --output text --instance-id"
 alias aws_ec2_spot_ls="aws ec2 describe-spot-instance-requests  --query SpotInstanceRequests[].[SpotInstanceRequestId,InstanceId,Status.Code,LaunchSpecification.InstanceType,SpotPrice] --output table"
 aws_ec2_spot_price() { aws ec2 describe-spot-price-history --max-items 1 --query SpotPriceHistory[0].SpotPrice --output text --product-descriptions 'Linux/UNIX' --instance-types $1 | head -1; }
+alias aws_ec2_ami_ls="aws ec2 describe-images --owners self --query Images[].[Name,ImageId,State] --output table"
 
 # Cloud Formation
 alias aws_cf_ls="aws cloudformation describe-stacks --query=Stacks[].[Description,StackName,StackStatus] --output=table"
