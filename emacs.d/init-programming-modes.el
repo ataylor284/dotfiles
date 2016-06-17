@@ -30,3 +30,10 @@
 	show-trailing-whitespace t
 	scala-indent:step 4))
 (add-hook 'scala-mode-hook 'at/scala-mode-hook)
+
+;; javascript
+(defun at/js-mode-hook ()
+  (setq indent-tabs-mode nil
+	js-indent-level 2))
+(add-hook 'js-mode-hook 'at/js-mode-hook)
+(setenv "NODE_NO_READLINE" "1")
