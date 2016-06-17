@@ -1,0 +1,16 @@
+source "~/.muttrc.ataylor"
+
+set imap_user = "ataylor@$my_domain"
+set imap_pass = $my_pass
+
+set smtp_url = "smtp://ataylor@mail.$my_domain:587/"
+set smtp_pass = $my_pass
+set from = "ataylor@$my_domain"
+set realname = "Andrew Taylor"
+
+set folder = "imaps://mail.$my_domain:993"
+set spoolfile = "+INBOX"
+
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
