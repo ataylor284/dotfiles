@@ -1,3 +1,6 @@
+;; everything
+(setq-default indent-tabs-mode nil)
+
 ;; elisp
 ; load common lisp aliases
 (require 'cl)
