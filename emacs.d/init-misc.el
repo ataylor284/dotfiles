@@ -33,6 +33,9 @@
     (setq tab-width 4))
   (force-window-update (current-buffer)))
 
+;; tramp stuff
+(setq password-cache-expiry (* 60 30))
+
 ;; load find-dired and push a useful default into the history
 (require 'find-dired)
 (setq interesting-file-extensions '("java" "groovy" "js" "jsp" "gsp" "xml" "properties"))
