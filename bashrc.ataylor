@@ -5,9 +5,18 @@ HISTIGNORE=fg:bg:ls:exit:history
 HISTCONTROL=erasedups:ignoreboth
 HISTTIMEFORMAT='%c '
 shopt -s histappend
-PROMPT_COMMAND='history -a'
+PROMPT_COMMAND=__prompt_command
 
-export PS1='\u@\h:\w\$ '
+function __prompt_command() {
+    local EXIT="$?"
+    history -a
+    if [ $EXIT != 0 ]; then
+	PS1="\\\$?=$EXIT \u@\h:\w\$ "
+    else
+	PS1="\u@\h:\w\$ "
+    fi
+}
+
 shopt -s cmdhist
 shopt -s checkwinsize
 
@@ -20,18 +29,19 @@ if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]] ; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
     export JDK_HOME=$(/usr/libexec/java_home)
-    export JAVA_OPTS="-noverify -Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
+    export JAVA_OPTS="-noverify -Xmx1024M $JAVA_OPTS"
     export EDITOR=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
 else
     export JAVA_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
     export JDK_HOME=$(dirname $(dirname $(readlink /etc/alternatives/javac)))
-    export JAVA_OPTS="-noverify -Xmx1024M -XX:MaxPermSize=256m $JAVA_OPTS"
+    export JAVA_OPTS="-noverify -Xmx1024M $JAVA_OPTS"
     export EDITOR="emacsclient"
 fi
 
 alias serve="python -m SimpleHTTPServer $@"
 alias json="python -m json.tool $@"
 alias gvm=sdk
+alias cp_p="rsync -WavP --human-readable --progress"
 
 for SCRIPT in $HOME/.bash_profile.d/*.sh; do
     source $SCRIPT
