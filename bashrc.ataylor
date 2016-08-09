@@ -38,6 +38,8 @@ else
     export EDITOR="emacsclient"
 fi
 
+export PATH=/usr/local/bin:$PATH
+
 alias serve="python -m SimpleHTTPServer $@"
 alias json="python -m json.tool $@"
 alias gvm=sdk

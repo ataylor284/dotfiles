@@ -1,5 +1,6 @@
 ;; everything
 (setq-default indent-tabs-mode nil)
+(setq-default fci-rule-column 120)
 
 ;; elisp
 ; load common lisp aliases

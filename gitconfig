@@ -22,6 +22,7 @@
 	root = rev-parse --show-toplevel
 [core]
 	pager = cat
+	excludesfile = ~/.gitignore
 [man]
 	viewer = catman
 [man "catman"]

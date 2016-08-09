@@ -19,9 +19,9 @@
 (package-initialize)
 
 (defvar at/packages '(autodisass-java-bytecode browse-kill-ring coffee-mode
-					       dockerfile-mode groovy-mode
-					       markdown-mode projectile
-					       scala-mode2 twittering-mode
+					       dockerfile-mode fill-column-indicator
+					       groovy-mode markdown-mode projectile
+					       rust-mode scala-mode2 twittering-mode
 					       ws-butler))
 (dolist (p at/packages)
   (when (not (package-installed-p p))
@@ -29,6 +29,7 @@
 
 (projectile-global-mode)
 (require 'autodisass-java-bytecode)
+(require 'fill-column-indicator)
 
 (load "~/.emacs.d/init-programming-modes")
 (load "~/.emacs.d/init-misc")
