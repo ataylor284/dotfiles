@@ -120,3 +120,14 @@ result."
   (pop-to-buffer (generate-new-buffer "*rest*"))
   (insert "GET http://127.0.0.1:8081/")
   (restclient-mode))
+
+;; test counterpart files for java, groovy, etc.
+(defun at/find-file-test-counterpart ()
+  (interactive)
+  (let* ((filename (buffer-file-name))
+         (is-test-file (string-match "Test\\." filename))
+         (counterpart (if is-test-file
+                          (replace-regexp-in-string "/test/" "/main/" (replace-regexp-in-string "Test\\(\\.[a-z]+\\)" "\\1" filename))
+                        (replace-regexp-in-string "/main/" "/test/" (replace-regexp-in-string "\\(\\.[a-z]+\\)" "Test\\1" filename)))))
+    (find-file counterpart)))
+
