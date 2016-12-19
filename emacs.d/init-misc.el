@@ -113,3 +113,10 @@ result."
       (goto-char (region-end))
       (insert " = "))
     (insert result)))
+
+(defun at/restclient ()
+  (interactive)
+  (require 'restclient)
+  (pop-to-buffer (generate-new-buffer "*rest*"))
+  (insert "GET http://127.0.0.1:8081/")
+  (restclient-mode))

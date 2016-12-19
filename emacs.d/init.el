@@ -15,14 +15,14 @@
 
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+	     '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-(defvar at/packages '(autodisass-java-bytecode browse-kill-ring coffee-mode
-					       dockerfile-mode fill-column-indicator
-					       groovy-mode markdown-mode projectile
-					       rust-mode scala-mode2 twittering-mode
-					       ws-butler))
+(defvar at/packages
+  '(autodisass-java-bytecode browse-kill-ring coffee-mode dockerfile-mode
+                             fill-column-indicator groovy-mode markdown-mode
+                             projectile restclient rust-mode scala-mode2
+                             twittering-mode ws-butler))
 (dolist (p at/packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -60,6 +60,7 @@
 (global-set-key (kbd "C-c h") 'at/browse-this-file)
 (global-set-key (kbd "<f9>") 'recompile)
 (global-set-key (kbd "C-=") 'at/inline-calc)
+(global-set-key (kbd "C-c C-f") 'at/find-file-test-counterpart)
 
 ;; stuff to put in the global namespace
 (defalias 'tab-width-toggle 'at/tab-width-toggle)
@@ -67,3 +68,4 @@
 (defalias 'make-invoice 'at/make-invoice)
 (defalias 'make-java-accessors 'at/make-java-accessors)
 (defalias 'comint-clear 'at/comint-clear)
+(defalias 'restclient 'at/restclient)
