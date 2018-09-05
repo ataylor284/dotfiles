@@ -20,6 +20,7 @@
 	serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 	authors = "!f() { git log --all --format='%aN <%aE>'| sort | uniq; }; f"
 	root = rev-parse --show-toplevel
+	current-branch = name-rev --name-only HEAD
 [core]
 	pager = cat
 	excludesfile = ~/.gitignore
