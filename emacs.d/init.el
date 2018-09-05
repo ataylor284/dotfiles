@@ -20,7 +20,7 @@
 
 (defvar at/packages
   '(autodisass-java-bytecode browse-kill-ring coffee-mode dockerfile-mode
-                             fill-column-indicator groovy-mode markdown-mode
+                             fill-column-indicator groovy-mode javadoc-lookup markdown-mode 
                              projectile restclient rust-mode scala-mode2
                              twittering-mode ws-butler))
 (dolist (p at/packages)
