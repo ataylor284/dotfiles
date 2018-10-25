@@ -4,6 +4,7 @@
 \set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
 -- [more] ->
 \set PROMPT2 '[more] %R> '
+\set x auto
 
 \pset pager off
 \pset linestyle unicode

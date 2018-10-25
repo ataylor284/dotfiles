@@ -40,6 +40,7 @@
   (load "~/.emacs.d/init-w3m"))
 ;;(load "~/.emacs.d/init-mozrepl")
 (load "~/.emacs.d/string-inflection")
+(load "~/.emacs.d/incr-int.el")
 (load "~/.emacs.d/site-local.el" 'no-error)
 
 ;; global keyboard stuff
